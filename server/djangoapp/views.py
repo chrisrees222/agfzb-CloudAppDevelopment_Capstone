@@ -69,7 +69,8 @@ def logout_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-dealership"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-dealership"
+        #url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-dealership"
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)

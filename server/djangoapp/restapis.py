@@ -8,19 +8,6 @@ from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptio
 import time
  
 
-def analyze_review_sentiments(text):
-    url = "https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/7d187f1c-9168-4008-a7a6-80a45dac1762"
-    api_key = "ClTvB5Okt6-KBJ_K8zWalMuiZJ15iB25FaNmrGKaChQt"
-    authenticator = IAMAuthenticator(api_key)
-    natural_language_understanding = NaturalLanguageUnderstandingV1(version='2021-08-01',authenticator=authenticator)
-    natural_language_understanding.set_service_url(url)
-    response = natural_language_understanding.analyze( text=text+"hello hello hello",features=Features(sentiment=SentimentOptions(targets=[text+"hello hello hello"]))).get_result()
-    label=json.dumps(response, indent=2)
-    label = response['sentiment']['document']['label']
-    
-    return(label)
-
-
 def get_dealers_from_cf(url, **params):
     results = []
     json_result = get_request(url, **params)
@@ -132,3 +119,15 @@ def post_request(url, payload, **kwargs):
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
     return json_data
+
+def analyze_review_sentiments(text):
+    url = "https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/7d187f1c-9168-4008-a7a6-80a45dac1762"
+    api_key = "ClTvB5Okt6-KBJ_K8zWalMuiZJ15iB25FaNmrGKaChQt"
+    authenticator = IAMAuthenticator(api_key)
+    natural_language_understanding = NaturalLanguageUnderstandingV1(version='2021-08-01',authenticator=authenticator)
+    natural_language_understanding.set_service_url(url)
+    response = natural_language_understanding.analyze( text=text+"hello hello hello",features=Features(sentiment=SentimentOptions(targets=[text+"hello hello hello"]))).get_result()
+    label=json.dumps(response, indent=2)
+    label = response['sentiment']['document']['label']
+    
+    return(label)
