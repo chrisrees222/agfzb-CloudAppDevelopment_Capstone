@@ -69,8 +69,7 @@ def logout_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-dealership"
-        #url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-dealership"
+        url = "https://chrisrees222-3000.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
@@ -78,13 +77,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-dealership"
-        #dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-dealership"
+        dealer_url = "https://chrisrees222-3000.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
 
         review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-review"    
-        #review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -93,8 +90,7 @@ def get_dealer_details(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-dealership"
-    #dealer_url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/get-dealership"
+    dealer_url = "https://chrisrees222-3000.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -128,7 +124,8 @@ def add_review(request, id):
             new_payload = {}
             new_payload["review"] = payload
             review_post_url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/post-review"
-            #review_post_url = "https://us-south.functions.appdomain.cloud/api/v1/web/b2118012-085e-439d-aed4-2a5c99798edc/dealership-package/post-review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
+
+
 
