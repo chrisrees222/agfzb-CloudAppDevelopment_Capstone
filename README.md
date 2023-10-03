@@ -1,3 +1,6 @@
+# git clone
+# python3 -m pip install -U -r requirements.txt
+
 # Final Project Template
 
 The final project for this course has several steps that you must complete. 
