@@ -22,7 +22,7 @@ def get_dealers_from_cf(url, **params):
 
         for dealer in dealers:
             if 'doc' in dealer:
-                dealer_doc = dealer["doc"]
+                dealer_doc = dealer
             else :
                 dealer_doc=dealer
             dealer_obj = CarDealer(
