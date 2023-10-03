@@ -66,6 +66,22 @@ def logout_request(request):
     logout(request)
     return redirect('djangoapp:index')
 
+#theia start for get
+
+# cd function
+# npm init -y
+# npm install -s @cloudant/cloudant 
+# npm install express
+## run below then launch on 3000
+# node get-dealership.js
+
+## for reviews by id and postman post
+# python3.8 -m pip install --upgrade pip
+# pip3.8 install Cloudant
+## run below then launch on 5000
+# python3.8 reviews.py
+
+
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
@@ -81,7 +97,7 @@ def get_dealer_details(request, id):
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
 
-        review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/4b21363a-2d5d-462c-9617-98689ed9165b/dealership-package/get-review"    
+        review_url = "https://chrisrees222-5000.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/get_reviews?id=15"    
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
